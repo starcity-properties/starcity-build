@@ -9,4 +9,6 @@
      wait-for-manual-trigger
      wait-for-repo)
     (with-repo
-      build-project)))
+      build-project
+      install-scripts
+      restart-service)))

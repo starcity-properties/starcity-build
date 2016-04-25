@@ -24,4 +24,14 @@
   (git/with-git repo-uri steps))
 
 (defn build-project [args ctx]
-  (shell/bash ctx (:cwd args) "lein with-profile production init-script"))
+  (shell/bash ctx (:cwd args)
+              "lein with-profile production init-script"))
+
+(defn install-scripts [args ctx]
+  (shell/bash ctx (:cwd args)
+              "./script/clean-starcity"
+              "./script/install-starcity"))
+
+(defn restart-service [args ctx]
+  (shell/bash ctx (:cwd args)
+              "service starcityd restart"))
