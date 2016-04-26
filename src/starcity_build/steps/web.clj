@@ -13,13 +13,14 @@
 
 (defn build-project [args ctx]
   (shell/bash ctx (:cwd args)
+              "export LEIN_ROOT=yes"
               "lein with-profile production init-script"))
 
 (defn install-scripts [args ctx]
   (shell/bash ctx (:cwd args)
-              "./script/clean-starcity"
-              "./script/install-starcity"))
+              "./init-script/clean-starcity"
+              "./init-script/install-starcity"))
 
 (defn restart-service [args ctx]
   (shell/bash ctx (:cwd args)
-              "service starcityd restart"))
+              "/etc/init.d/starcityd restart"))
