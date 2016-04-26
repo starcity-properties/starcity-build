@@ -12,7 +12,7 @@
   :plugins [[org.clojars.strongh/lein-init-script "1.3.1"]]
 
   :lis-opts {:redirect-output-to "/var/log/starcity-build-init.log"
-             :name               "sbuild"
+             :name               "starcity-build"
              :jvm-opts           ["-Xms128m"
                                   "-Xmx512m"
                                   "-server"]}
