@@ -10,18 +10,18 @@
             [clojure.tools.logging :as log]))
 
 (defn authenticated? [name pass]
-  (and (= name (System/getenv "STARCITY_BUILD_USER"))
-       (= pass (System/getenv "STARCITY_BUILD_PASS"))))
+  (and (= name (System/getenv "USER"))
+       (= pass (System/getenv "PASSWORD"))))
 
 (defn -main [& args]
   (let [;; the home dir is where LambdaCD saves all data.
         ;; point this to a particular directory to keep builds around after restarting
-        home-dir "/usr/local/starcity-lambdacd"
+        home-dir (System/getenv "HOME_DIR") ; "/var/starcity/build"
         config   {:home-dir home-dir
                   :name     "starcity build"}
         ;; initialize and wire everything together
         pipeline (lambdacd/assemble-pipeline
-                  pipeline/web-pipeline-def
+                  pipeline/pipeline-def
                   config)
         ;; create a Ring handler for the UI
         app      (ui/ui-for pipeline)]
