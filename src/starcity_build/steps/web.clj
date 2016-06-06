@@ -12,15 +12,18 @@
   (git/with-git repo-uri steps))
 
 (defn build-project [args ctx]
-  (shell/bash ctx (:cwd args)
-              "export LEIN_ROOT=yes"
-              "lein with-profile production init-script"))
+  (shell/bash ctx (:cwd args) "lein uberjar"))
 
-(defn install-scripts [args ctx]
-  (shell/bash ctx (:cwd args)
-              "./init-script/clean-starcity"
-              "./init-script/install-starcity"))
+(defn install-jar [args ctx]
+  (let [project    (read-string (slurp "project.clj"))
+        name       (str (second project))
+        version    (nth project 2)
+        install-to (str (System/getenv "WEBSERVER_INSTALL_DIR")
+                        "/"
+                        (System/getenv "WEBSERVER_BINARY_NAME"))]
+    (shell/bash ctx (:cwd args) (format "cp target/%s-%s-standalone.jar %s"
+                                        name version install-to))))
 
 (defn restart-service [args ctx]
-  (shell/bash ctx (:cwd args)
-              "/etc/init.d/starcityd restart"))
+  (let [service (System/getenv "WEBSERVER_SERVICE_NAME")]
+    (shell/bash ctx (:cwd args) (format "sudo systemctl restart %s" service))))

@@ -10,5 +10,5 @@
      web/wait-for-repo)
     (web/with-repo
       web/build-project
-      web/install-scripts
+      web/install-jar
       web/restart-service)))
