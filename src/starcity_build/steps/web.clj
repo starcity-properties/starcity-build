@@ -15,7 +15,7 @@
   (shell/bash ctx (:cwd args) "lein uberjar"))
 
 (defn install-jar [args ctx]
-  (let [project    (read-string (slurp "project.clj"))
+  (let [project    (-> (format "%s/project.clj" (:cwd args)) slurp read-string)
         name       (str (second project))
         version    (nth project 2)
         install-to (str (System/getenv "WEBSERVER_INSTALL_DIR")
