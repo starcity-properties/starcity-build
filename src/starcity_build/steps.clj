@@ -52,7 +52,7 @@
 
 (defn restart-service [args ctx]
   (let [build (get-in args [:global :build])
-        {:keys [name user domain]}]
+        {:keys [name user domain]} (get configs build)]
     (shell/bash ctx (:cwd args)
                 (format "ssh %s@%s 'sudo systemctl restart %s.service'"
                         user domain name))))
