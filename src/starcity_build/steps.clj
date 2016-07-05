@@ -49,3 +49,10 @@
                 (format "scp target/%s-%s-standalone.jar %s@%s:%s/%s/%s.jar"
                         project-name version
                         user domain install-dir name name))))
+
+(defn restart-service [args ctx]
+  (let [build (get-in args [:global :build])
+        {:keys [name user domain]}]
+    (shell/bash ctx (:cwd args)
+                (format "ssh %s@%s 'sudo systemctl restart %s.service'"
+                        user domain name))))

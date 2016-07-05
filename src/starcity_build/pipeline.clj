@@ -10,4 +10,5 @@
      steps/wait-for-staging-repo)
     (steps/with-repo
       steps/build-project
-      steps/install-jar)))
+      steps/install-jar
+      steps/restart-service)))
