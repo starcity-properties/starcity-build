@@ -16,8 +16,8 @@
 (defn -main [& args]
   (let [;; the home dir is where LambdaCD saves all data.
         ;; point this to a particular directory to keep builds around after restarting
-        home-dir (System/getenv "HOME_DIR") ; "/var/starcity/build"
-        config   {:home-dir home-dir
+        data-dir (System/getenv "DATA_DIR")
+        config   {:home-dir data-dir
                   :name     "starcity build"}
         ;; initialize and wire everything together
         pipeline (lambdacd/assemble-pipeline
@@ -25,7 +25,7 @@
                   config)
         ;; create a Ring handler for the UI
         app      (ui/ui-for pipeline)]
-    (log/info "LambdaCD Home Directory is " home-dir)
+    (log/info "LambdaCD Data Directory is " data-dir)
     ;; this starts the pipeline and runs one build after the other.
     ;; there are other runners and you can define your own as well.
     (runners/start-one-run-after-another pipeline)
