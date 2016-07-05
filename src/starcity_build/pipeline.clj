@@ -10,8 +10,8 @@
       wait-for-manual-trigger
       steps/wait-for-production-repo)
      (either
-      (wait-for-manual-trigger
-       steps/wait-for-staging-repo)))
+      wait-for-manual-trigger
+      steps/wait-for-staging-repo))
     (steps/with-repo
       steps/build-project
       steps/install-jar)))
