@@ -5,10 +5,13 @@
 
 (def pipeline-def
   `(
-    (either
-     wait-for-manual-trigger
-     steps/wait-for-production-repo
-     steps/wait-for-staging-repo)
+    (in-parallel
+     (either
+      wait-for-manual-trigger
+      steps/wait-for-production-repo)
+     (either
+      (wait-for-manual-trigger
+       steps/wait-for-staging-repo)))
     (steps/with-repo
       steps/build-project
       steps/install-jar)))
