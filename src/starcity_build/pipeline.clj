@@ -9,6 +9,7 @@
      steps/wait-for-production-repo
      steps/wait-for-staging-repo)
     (steps/with-repo
+      steps/build-assets
       steps/build-project
       steps/install-jar
       steps/restart-service)))

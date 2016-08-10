@@ -36,8 +36,11 @@
 (defn with-repo [& steps]
   (git/with-git repo-uri steps))
 
+(defn build-assets [args ctx]
+  (shell/bash ctx (:cwd args) "sh ./script/build-assets.sh"))
+
 (defn build-project [args ctx]
-  (shell/bash ctx (:cwd args) "bower install && lein uberjar"))
+  (shell/bash ctx (:cwd args) "lein uberjar"))
 
 (defn install-jar [args ctx]
   (let [project                                (-> (format "%s/project.clj" (:cwd args)) slurp read-string)
