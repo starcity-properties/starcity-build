@@ -1,6 +1,6 @@
-(ns starcity-build.core
+(ns build.core
   (:gen-class)
-  (:require [starcity-build.pipeline :as pipeline]
+  (:require [build.pipeline :as pipeline]
             [ring.server.standalone :as ring-server]
             [ring.middleware.basic-authentication :refer [wrap-basic-authentication]]
             [lambdacd.ui.ui-server :as ui]
@@ -9,11 +9,11 @@
             [lambdacd.core :as lambdacd]
             [clojure.tools.logging :as log]))
 
-(defn authenticated? [name pass]
+#_(defn authenticated? [name pass]
   (and (= name (System/getenv "USER"))
        (= pass (System/getenv "PASSWORD"))))
 
-(defn -main [& args]
+#_(defn -main [& args]
   (let [;; the home dir is where LambdaCD saves all data.
         ;; point this to a particular directory to keep builds around after restarting
         data-dir (System/getenv "DATA_DIR")

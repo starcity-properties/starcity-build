@@ -1,6 +1,6 @@
-(defproject starcity-build "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+(defproject build "0.2.0-SNAPSHOT"
+  :description "Starcity's build server."
+  :url "https://github.com/starcity-properties/starcity-build.git"
   :dependencies [[lambdacd "0.9.3"]
                  [ring-server "0.3.1"]
                  [org.clojure/clojure "1.7.0"]
@@ -11,4 +11,5 @@
                  [ring-basic-authentication "1.0.5"]]
 
   :profiles {:uberjar {:aot :all}}
-  :main starcity-build.core)
+
+  :main build.core)

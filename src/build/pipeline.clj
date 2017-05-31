@@ -1,9 +1,9 @@
-(ns starcity-build.pipeline
+(ns build.pipeline
   (:use [lambdacd.steps.control-flow :refer :all])
   (:require [lambdacd.steps.manualtrigger :refer [wait-for-manual-trigger]]
-            [starcity-build.steps :as steps]))
+            [build.steps :as steps]))
 
-(def pipeline-def
+#_(def pipeline-def
   `(
     (either
      steps/wait-for-production-repo
