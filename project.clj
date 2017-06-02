@@ -1,4 +1,4 @@
-(defproject build "0.2.0-SNAPSHOT"
+(defproject build "0.2.0"
   :description "Starcity's build server."
   :url "https://github.com/starcity-properties/starcity-build.git"
   :dependencies [[org.clojure/clojure "1.7.0"]
