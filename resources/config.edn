@@ -1,0 +1,49 @@
+{:server {:port #or [#env BUILD_PORT 8090]}
+
+ :auth #profile {:dev  {:user "user"
+                        :pass "pass"}
+                 :prod {:user #env BUILD_USER
+                        :pass #env BUILD_PASS}}
+
+ :deploy {:hosts {:production "192.168.137.39"
+                  :staging    "192.168.142.43"}
+          :user  "deploy"
+          :dir   #profile {:dev     "data"
+                           :default "/var/starcity-build/data"}}
+
+ :projects [{:name         "starcity-web"
+             :pipeline-url "/starcity-web/production"
+             :repo-uri     "https://github.com/starcity-properties/starcity-web.git"
+             :repo-branch  "master"
+             :build-script "sh ./script/build-assets.sh && lein uberjar"
+             :deploy-to    ^:ref [:deploy :hosts :production]
+             :install-dir  "/var/starcity-web"
+             :data-dir     "starcity-web"}
+
+            {:name         "starcity-web (staging)"
+             :pipeline-url "/starcity-web/staging"
+             :repo-uri     "https://github.com/starcity-properties/starcity-web.git"
+             :repo-branch  "development"
+             :build-script "sh ./script/build-assets.sh && lein uberjar"
+             :deploy-to    ^:ref [:deploy :hosts :staging]
+             :install-dir  "/var/starcity-web"
+             :data-dir     "starcity-web-staging"}
+
+
+            {:name         "member application"
+             :pipeline-url "/mapp/production"
+             :repo-uri     "https://github.com/starcity-properties/member-application.git"
+             :repo-branch  "master"
+             :build-script "sh ./script/build.sh"
+             :deploy-to    ^:ref [:deploy :hosts :production]
+             :install-dir  "/var/mapp"
+             :data-dir     "mapp"}
+
+            {:name         "member application (staging)"
+             :pipeline-url "/mapp/staging"
+             :repo-uri     "https://github.com/starcity-properties/member-application.git"
+             :repo-branch  "development"
+             :build-script "sh ./script/build.sh"
+             :deploy-to    ^:ref [:deploy :hosts :staging]
+             :install-dir  "/var/mapp"
+             :data-dir     "mapp-staging"}]}
