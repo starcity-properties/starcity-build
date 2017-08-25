@@ -3,27 +3,33 @@
             [lambdacd.steps.git :as git]
             [build.config :as config :refer [config]]))
 
+
 ;; =============================================================================
 ;; Steps
 ;; =============================================================================
+
 
 (defn wait-for-repo
   [repo-uri branch]
   (fn [args ctx]
     (git/wait-for-git ctx repo-uri branch)))
 
+
 (defn with-repo
   [uri branch & steps]
   (git/with-git-branch uri branch steps))
+
 
 (defn build
   [script]
   (fn [args ctx]
     (shell/bash ctx (:cwd args) script)))
 
+
 (defn project-meta [args]
   (let [project (-> (format "%s/project.clj" (:cwd args)) slurp read-string)]
     [(str (second project)) (nth project 2)]))
+
 
 (defn install-jar
   [deploy-to install-dir]
@@ -37,6 +43,7 @@
                          deploy-to
                          install-dir
                          project-name)))))
+
 
 (defn restart-service
   [deploy-to]

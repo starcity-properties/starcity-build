@@ -46,4 +46,23 @@
              :build-script "sh ./script/build.sh"
              :deploy-to    ^:ref [:deploy :hosts :staging]
              :install-dir  "/var/mapp"
-             :data-dir     "mapp-staging"}]}
+             :data-dir     "mapp-staging"}
+
+
+            {:name         "odin"
+             :pipeline-url "/odin/production"
+             :repo-uri     "https://github.com/starcity-properties/odin.git"
+             :repo-branch  "master"
+             :build-script "sh ./script/build.sh"
+             :deploy-to    ^:ref [:deploy :hosts :production]
+             :install-dir  "/var/odin"
+             :data-dir     "odin"}
+
+            {:name         "odin (staging)"
+             :pipeline-url "/odin/staging"
+             :repo-uri     "https://github.com/starcity-properties/odin.git"
+             :repo-branch  "development"
+             :build-script "sh ./script/build.sh"
+             :deploy-to    ^:ref [:deploy :hosts :staging]
+             :install-dir  "/var/odin"
+             :data-dir     "odin-staging"}]}
