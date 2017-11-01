@@ -1,7 +1,8 @@
 (ns build.steps
-  (:require [lambdacd.steps.shell :as shell]
-            [lambdacd.steps.git :as git]
-            [build.config :as config :refer [config]]))
+  (:require [build.config :as config :refer [config]]
+            [clojure.string :as string]
+            [lambdacd.steps.shell :as shell]
+            [lambdacd.steps.git :as git]))
 
 
 ;; =============================================================================
@@ -28,7 +29,8 @@
 
 (defn project-meta [args]
   (let [project (-> (format "%s/project.clj" (:cwd args)) slurp read-string)]
-    [(str (second project)) (nth project 2)]))
+    [(-> (second project) str (string/split #"/") last)
+     (nth project 2)]))
 
 
 (defn install-jar
