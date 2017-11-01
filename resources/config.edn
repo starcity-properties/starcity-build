@@ -65,4 +65,23 @@
              :build-script "sh ./script/build.sh"
              :deploy-to    ^:ref [:deploy :hosts :staging]
              :install-dir  "/var/odin"
-             :data-dir     "odin-staging"}]}
+             :data-dir     "odin-staging"}
+
+
+            {:name         "reactor"
+             :pipeline-url "/reactor/production"
+             :repo-uri     "https://github.com/starcity-properties/reactor.git"
+             :repo-branch  "master"
+             :build-script "sh ./script/build.sh"
+             :deploy-to    ^:ref [:deploy :hosts :production]
+             :install-dir  "/var/reactor"
+             :data-dir     "reactor"}
+
+            {:name         "reactor (staging)"
+             :pipeline-url "/reactor/staging"
+             :repo-uri     "https://github.com/starcity-properties/reactor.git"
+             :repo-branch  "development"
+             :build-script "sh ./script/build.sh"
+             :deploy-to    ^:ref [:deploy :hosts :staging]
+             :install-dir  "/var/reactor"
+             :data-dir     "reactor-staging"}]}
