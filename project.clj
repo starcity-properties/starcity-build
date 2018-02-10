@@ -1,6 +1,8 @@
-(defproject build "0.4.0-SNAPSHOT"
+(defproject build "0.4.0"
   :description "Starcity's build server."
   :url "https://github.com/starcity-properties/starcity-build.git"
+  :license {:name "Eclipse Public License"
+            :url  "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
                  ;; Logging
                  [org.clojure/tools.logging "0.3.0"]
