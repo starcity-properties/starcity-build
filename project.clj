@@ -1,4 +1,4 @@
-(defproject build "0.4.0"
+(defproject build "0.5.0-SNAPSHOT"
   :description "Starcity's build server."
   :url "https://github.com/starcity-properties/starcity-build.git"
   :license {:name "Eclipse Public License"
