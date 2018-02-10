@@ -11,28 +11,31 @@
           :dir   #profile {:dev     "data"
                            :default "/var/starcity-build/data"}}
 
+ :git {:username #env GITHUB_USERNAME
+       :password #env GITHUB_PASSWORD}
+
  :projects [{:name         "starcity-web"
              :pipeline-url "/starcity-web/production"
-             :repo-uri     "https://github.com/starcity-properties/starcity-web.git"
+             :repo-uri     "git@github.com:starcity-properties/starcity-web.git"
              :repo-branch  "master"
-             :build-script "sh ./script/build-assets.sh && lein uberjar"
+             :build-script "sh ./script/build.sh"
              :deploy-to    ^:ref [:deploy :hosts :production]
-             :install-dir  "/var/starcity-web"
+             :install-dir  "/var/public"
              :data-dir     "starcity-web"}
 
             {:name         "starcity-web (staging)"
              :pipeline-url "/starcity-web/staging"
-             :repo-uri     "https://github.com/starcity-properties/starcity-web.git"
+             :repo-uri     "git@github.com:starcity-properties/starcity-web.git"
              :repo-branch  "development"
-             :build-script "sh ./script/build-assets.sh && lein uberjar"
+             :build-script "sh ./script/build.sh"
              :deploy-to    ^:ref [:deploy :hosts :staging]
-             :install-dir  "/var/starcity-web"
+             :install-dir  "/var/public"
              :data-dir     "starcity-web-staging"}
 
 
             {:name         "member application"
              :pipeline-url "/mapp/production"
-             :repo-uri     "https://github.com/starcity-properties/member-application.git"
+             :repo-uri     "git@github.com:starcity-properties/member-application.git"
              :repo-branch  "master"
              :build-script "sh ./script/build.sh"
              :deploy-to    ^:ref [:deploy :hosts :production]
@@ -41,7 +44,7 @@
 
             {:name         "member application (staging)"
              :pipeline-url "/mapp/staging"
-             :repo-uri     "https://github.com/starcity-properties/member-application.git"
+             :repo-uri     "git@github.com:starcity-properties/member-application.git"
              :repo-branch  "development"
              :build-script "sh ./script/build.sh"
              :deploy-to    ^:ref [:deploy :hosts :staging]
@@ -51,7 +54,7 @@
 
             {:name         "odin"
              :pipeline-url "/odin/production"
-             :repo-uri     "https://github.com/starcity-properties/odin.git"
+             :repo-uri     "git@github.com:starcity-properties/odin.git"
              :repo-branch  "master"
              :build-script "sh ./script/build.sh"
              :deploy-to    ^:ref [:deploy :hosts :production]
@@ -60,7 +63,7 @@
 
             {:name         "odin (staging)"
              :pipeline-url "/odin/staging"
-             :repo-uri     "https://github.com/starcity-properties/odin.git"
+             :repo-uri     "git@github.com:starcity-properties/odin.git"
              :repo-branch  "development"
              :build-script "sh ./script/build.sh"
              :deploy-to    ^:ref [:deploy :hosts :staging]
@@ -70,7 +73,7 @@
 
             {:name         "reactor"
              :pipeline-url "/reactor/production"
-             :repo-uri     "https://github.com/starcity-properties/reactor.git"
+             :repo-uri     "git@github.com:starcity-properties/reactor.git"
              :repo-branch  "master"
              :build-script "sh ./script/build.sh"
              :deploy-to    ^:ref [:deploy :hosts :production]
@@ -79,7 +82,7 @@
 
             {:name         "reactor (staging)"
              :pipeline-url "/reactor/staging"
-             :repo-uri     "https://github.com/starcity-properties/reactor.git"
+             :repo-uri     "git@github.com:starcity-properties/reactor.git"
              :repo-branch  "development"
              :build-script "sh ./script/build.sh"
              :deploy-to    ^:ref [:deploy :hosts :staging]

@@ -2,7 +2,7 @@
   (:require [build.config :as config :refer [config]]
             [clojure.string :as string]
             [lambdacd.steps.shell :as shell]
-            [lambdacd.steps.git :as git]))
+            [lambdacd-git.core :as git]))
 
 
 ;; =============================================================================
@@ -13,12 +13,13 @@
 (defn wait-for-repo
   [repo-uri branch]
   (fn [args ctx]
-    (git/wait-for-git ctx repo-uri branch)))
+    (git/wait-for-git ctx repo-uri :ref (format "refs/heads/%s" branch))))
 
 
-(defn with-repo
-  [uri branch & steps]
-  (git/with-git-branch uri branch steps))
+(defn clone
+  [repo-uri]
+  (fn [args ctx]
+   (git/clone ctx repo-uri (:revision args) (:cwd args))))
 
 
 (defn build
