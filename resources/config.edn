@@ -87,4 +87,42 @@
              :build-script "sh ./script/build.sh"
              :deploy-to    ^:ref [:deploy :hosts :staging]
              :install-dir  "/var/reactor"
-             :data-dir     "reactor-staging"}]}
+             :data-dir     "reactor-staging"}
+
+
+            {:name         "lobby"
+             :pipeline-url "/lobby/production"
+             :repo-uri     "git@github.com:starcity-properties/lobby.git"
+             :repo-branch  "master"
+             :build-script "sh ./script/build.sh"
+             :deploy-to    ^:ref [:deploy :hosts :production]
+             :install-dir  "/var/lobby"
+             :data-dir     "lobby"}
+
+            {:name         "lobby (staging)"
+             :pipeline-url "/lobby/staging"
+             :repo-uri     "git@github.com:starcity-properties/lobby.git"
+             :repo-branch  "development"
+             :build-script "sh ./script/build.sh"
+             :deploy-to    ^:ref [:deploy :hosts :staging]
+             :install-dir  "/var/lobby"
+             :data-dir     "lobby-staging"}
+
+
+            {:name         "blueprints"
+             :pipeline-url "/blueprints/production"
+             :repo-uri     "git@github.com:starcity-properties/blueprints.git"
+             :repo-branch  "master"
+             :build-script "sh ./script/build.sh"
+             :deploy-to    ^:ref [:deploy :hosts :production]
+             :install-dir  "/var/blueprints"
+             :data-dir     "blueprints"}
+
+            {:name         "blueprints (staging)"
+             :pipeline-url "/blueprints/staging"
+             :repo-uri     "git@github.com:starcity-properties/blueprints.git"
+             :repo-branch  "development"
+             :build-script "sh ./script/build.sh"
+             :deploy-to    ^:ref [:deploy :hosts :staging]
+             :install-dir  "/var/blueprints"
+             :data-dir     "blueprints-staging"}]}
